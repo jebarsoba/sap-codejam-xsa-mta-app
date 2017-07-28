@@ -1,0 +1,62 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="default">
+            <EntityType Name="POHeaderType">
+                <Key>
+                    <PropertyRef Name="PURCHASEORDERID"/>
+                </Key>
+                <Property Name="PURCHASEORDERID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="HISTORY.CREATEDBY" Type="Edm.String" MaxLength="10"/>
+                <Property Name="HISTORY.CREATEDAT" Type="Edm.DateTime"/>
+                <Property Name="HISTORY.CHANGEDBY" Type="Edm.String" MaxLength="10"/>
+                <Property Name="HISTORY.CHANGEDAT" Type="Edm.DateTime"/>
+                <Property Name="NOTEID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PARTNER" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CURRENCY" Type="Edm.String" MaxLength="5"/>
+                <Property Name="GROSSAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="NETAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="TAXAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="LIFECYCLESTATUS" Type="Edm.String" MaxLength="1"/>
+                <Property Name="APPROVALSTATUS" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CONFIRMSTATUS" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ORDERINGSTATUS" Type="Edm.String" MaxLength="1"/>
+                <Property Name="INVOICINGSTATUS" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="POItem" Relationship="default.ItemsType" FromRole="POHeaderPrincipal" ToRole="POItemDependent"/>
+            </EntityType>
+            <EntityType Name="POItemType">
+                <Key>
+                    <PropertyRef Name="PURCHASEORDERID"/>
+                    <PropertyRef Name="PURCHASEORDERITEM"/>
+                </Key>
+                <Property Name="PURCHASEORDERID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="PURCHASEORDERITEM" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="PRODUCT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="NOTEID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CURRENCY" Type="Edm.String" MaxLength="5"/>
+                <Property Name="GROSSAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="NETAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="TAXAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="QUANTITY" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="QUANTITYUNIT" Type="Edm.String" MaxLength="3"/>
+                <Property Name="DELIVERYDATE" Type="Edm.DateTime"/>
+            </EntityType>
+            <Association Name="ItemsType">
+                <End Type="default.POHeaderType" Role="POHeaderPrincipal" Multiplicity="1"/>
+                <End Type="default.POItemType" Role="POItemDependent" Multiplicity="*"/>
+            </Association>
+            <EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="POHeader" EntityType="default.POHeaderType"/>
+                <EntitySet Name="POItem" EntityType="default.POItemType"/>
+                <AssociationSet Name="Items" Association="default.ItemsType">
+                    <End Role="POHeaderPrincipal" EntitySet="POHeader"/>
+                    <End Role="POItemDependent" EntitySet="POItem"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
