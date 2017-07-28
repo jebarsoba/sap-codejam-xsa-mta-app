@@ -1,0 +1,1 @@
+Sample native HANA XSA Multi-target fullstack application comprising a HANA database module, a Node.JS back-end module and an SAP Fiori web module, build during the SAP CodeJam on Friday 2017/07/28.
