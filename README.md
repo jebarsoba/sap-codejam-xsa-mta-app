@@ -1,2 +1,2 @@
 # sap-codejam-xsa-mta-app
-Sample native *__HANA XSA__* Multi-target fullstack application comprising a HANA database module, a Node.JS back-end module and an SAP Fiori web module, build during the SAP CodeJam on Friday 2017/07/28.
+Sample *__HANA XSA__* fullstack application comprising a HANA database module, a Node.JS back-end module and an SAP Fiori/SAPUI5 web module. Built during the *__SAP CodeJam__* on Friday 2017/07/28, using "SAP HANA, express edition" running on Ubuntu and Google Cloud Platform.
